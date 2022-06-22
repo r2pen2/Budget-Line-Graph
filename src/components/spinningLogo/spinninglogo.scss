@@ -1,0 +1,19 @@
+.logo {
+    height: 40vmin;
+    pointer-events: none;
+  }
+  
+  @media (prefers-reduced-motion: no-preference) {
+    .logo {
+      animation: wobble infinite 3s;
+    }
+  }
+
+@keyframes wobble {
+    50% {
+      transform: rotate(5deg);
+    }
+    100% {
+      transform: rotate(0deg);
+    }
+  }
