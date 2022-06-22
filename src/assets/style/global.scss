@@ -1,4 +1,23 @@
+// Font faces
 @font-face {
-    font-family: 'ShareTechMono'; /*a name to be used later*/
+    font-family: 'Share Tech Mono'; /*a name to be used later*/
     src: url("../../assets/fonts//ShareTechMono-Regular.ttf"); /*URL to font*/
+}
+
+// Global styling
+:root {
+    font-size: 16;
+    font-family: "Share Tech Mono";
+}
+
+body::-webkit-scrollbar {
+    width: 0.25rem;
+}
+
+body::-webkit-scrollbar-track {
+    background: #1e1e24;
+}
+
+body::-webkit-scrollbar-thumb {
+    background: #6649b8;
 }

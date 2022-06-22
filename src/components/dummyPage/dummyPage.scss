@@ -1,0 +1,9 @@
+@import url('../../assets/style/global.scss');
+@import "../../assets/style/variables";
+
+.dummy-page {
+    color: black;
+    background-color: white;
+    margin-left: $navbar-width;
+    padding: 1rem;
+}

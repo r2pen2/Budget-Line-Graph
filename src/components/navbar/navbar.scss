@@ -1,0 +1,105 @@
+@import url('../../assets/style/global.scss');
+@import "../../assets/style/variables";
+
+.navbar {
+    width: $navbar-width;
+    height: 100vh;
+    position: fixed;
+    background-color: $bg-primary;
+    display: flex;
+    align-items: left;
+    transition: width 200ms ease;
+
+    .nav-items {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+
+        :last-child {
+            margin-top: auto;
+        }
+
+        .item {
+            display: flex;
+            width: 100%;
+            flex-direction: row;
+            align-items: center;
+            justify-content: flex-start;
+            height: $navbar-width;
+
+            .button {
+                border-radius: 0;
+                width: 100%;
+                height: 100%;
+                justify-content: flex-start;
+                align-items: center;
+                display: flex;
+                filter: grayscale(100%) brightness(150%);
+
+                .item-icon {
+                    min-width: 2rem;
+                    margin: 0 .9rem;
+                }
+
+                &.logo {
+                    justify-content: flex-end;
+                    align-items: center;
+                    display: flex;
+                    background: $bg-secondary;
+                                        
+                    .item-text {
+                        font-size: 1.5rem;
+                        font-weight: bold;
+                        text-transform: uppercase;
+                        text-align: center;
+                        letter-spacing: 0.2ch;
+                    }
+                }
+
+
+                &:hover {
+                    filter: grayscale(0%) brightness(100%);
+                    background: $bg-secondary;
+
+                    .item-text {
+                        color: $text-primary;
+                    }
+                }
+            }
+        }
+    }
+
+    .item-text {
+        opacity: 0;
+        margin-left: 1rem;
+        transition: opacity 300ms ease;
+    }
+
+    .rotate {
+        transform: rotate(0deg);
+        transition: transform 300ms;
+    }
+
+    &:hover {
+        width: 16rem;
+
+        .item-text {
+            opacity: 1;
+        }
+
+        .button {
+            &.logo {
+                filter: grayscale(0%) brightness(100%);
+            }
+        }
+
+        .rotate {
+            transform: rotate(-90deg);
+        }
+    }
+}
