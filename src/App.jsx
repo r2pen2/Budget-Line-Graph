@@ -1,14 +1,14 @@
 // Style imports
 import "./App.scss";
+import { Canvas } from 'react-three-fiber';
 import theme from "./assets/style/theme";
 
 // Library Imports
 import { ThemeProvider } from "@mui/material"
-import { BrowserRouter as Router } from "react-router-dom";
 
 // Component imports
 import Navbar from "./components/navbar/Navbar";
-import DummyPage from "./components/dummyPage/DummyPage";
+import Waves from "./components/waves/Waves";
 
 function App() {
 
@@ -16,9 +16,7 @@ function App() {
     <div className="app">
       <ThemeProvider theme={theme}>
         <Navbar/>
-        <Router>
-          <DummyPage/>
-        </Router>
+        <Waves />
       </ThemeProvider>
     </div>
   )
