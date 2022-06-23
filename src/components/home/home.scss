@@ -1,0 +1,59 @@
+@import url('../../assets/style/global.scss');
+
+.home {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+
+    .panel {
+        width: 700px;
+        height: 200px;
+        border-radius: 15px;
+        border-top: 1px solid rgba(255, 255, 255, 0.5);
+        border-left: 1px solid rgba(255, 255, 255, 0.5);
+        backdrop-filter: blur(5px);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        margin-bottom: 40px;
+
+        .branding {
+            display: flex;
+            flex-direction: column;
+            color: white;
+            align-items: center;
+            justify-content: center;
+            width: 700px;
+    
+            .title {
+                font-size: 90px;
+                font-weight: bold;
+                text-transform: uppercase;
+                letter-spacing: 0.2ch;
+                text-align: center;
+                font-family: "Share Tech Mono"
+            }
+        }
+
+        .typewriter {
+            display: flex;
+            flex-direction: column;
+            color: white;
+            align-items: center;
+            justify-content: center;
+            flex-direction: row;
+            margin-top: -36px;
+        }
+    }
+
+    .logged-in {
+        color: white;
+        font-family: "Share Tech Mono"
+    }
+}

@@ -9,6 +9,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 // Component imports
 import Navbar from "./components/navbar/Navbar";
 import Wallet from "./components/wallet/Wallet";
+import Home from "./components/home/Home";
 
 function App() {
 
@@ -20,8 +21,8 @@ function App() {
           <Router>
             <Routes>
               <Route path="/" element={<div>Graph</div>} />
-              <Route path="/home" element={<div>Home</div>} />
-              <Route path="/graph" element={<div>Home</div>} />
+              <Route path="/home" element={<Home />} />
+              <Route path="/graph" element={<div>Graph</div>} />
               <Route path="/wallet" element={<Wallet />} />
               <Route path="/logout" element={<div>Logout</div>} />
             </Routes>
