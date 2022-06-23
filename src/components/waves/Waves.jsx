@@ -1,6 +1,6 @@
 import "./waves.scss";
 import video from "../../assets/images/city.mp4";
-import { useRef, useEffect } from 'react'
+import { useRef } from 'react'
 
 export default function Waves() {
   

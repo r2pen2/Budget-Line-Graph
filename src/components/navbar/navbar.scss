@@ -65,10 +65,6 @@
                 &:hover {
                     filter: grayscale(0%) brightness(100%);
                     background: $bg-secondary;
-
-                    .item-text {
-                        color: $text-primary;
-                    }
                 }
             }
         }
