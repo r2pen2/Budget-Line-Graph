@@ -25,5 +25,8 @@ export default createTheme({
     bgSecondary: {
         main: "#141418",
     },
+    frozenBlue: {
+      main: 'rgba(0, 225, 255, 0.5)'
+    }
   },
 });

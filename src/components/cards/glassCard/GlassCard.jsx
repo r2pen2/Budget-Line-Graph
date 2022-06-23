@@ -3,6 +3,11 @@ import "./glassCard.scss";
 import { useState } from 'react';
 import Tilt from "../Tilt";
 
+import AcUnitTwoToneIcon from '@mui/icons-material/AcUnitTwoTone';
+import LocalFireDepartmentTwoToneIcon from '@mui/icons-material/LocalFireDepartmentTwoTone';
+import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone';
+import { IconButton, Tooltip } from "@mui/material"
+
 const formatter = new Intl.NumberFormat('en-US', {
   style: 'currency',
   currency: 'USD'
@@ -55,19 +60,54 @@ export default function GlassCard({ credit }) {
 
   const [status, setStatus] = useState(credit.status);
 
+  function getStatusButtons() {
+    if (status === "active") {
+      return (
+        <div className="top-buttons">
+          <Tooltip title="Freeze Card">
+            <IconButton className="left">
+              <AcUnitTwoToneIcon fontSize="large" color="textSecondary"/>
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="Destroy Card">
+            <IconButton className="right">
+              <DeleteTwoToneIcon fontSize="large" color="textSecondary"/>
+            </IconButton>
+          </Tooltip>
+        </div>
+      )
+    } else {
+      return (
+        <div className="top-buttons">
+          <Tooltip title="Unfreeze Card">
+            <IconButton className="left">
+              <LocalFireDepartmentTwoToneIcon fontSize="large" color="textSecondary"/>
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="Destroy Card">
+            <IconButton className="right">
+              <DeleteTwoToneIcon fontSize="large" color="textSecondary"/>
+            </IconButton>
+          </Tooltip>
+        </div>
+      )
+    }
+  }
+
   return (
     <Tilt options={{perspective: 1, max: 150, glare: true }}>
         <div className={"card " + getDirection(credit) + " "  + status}>
           <div className="status">
+            {getStatusButtons()}
           </div>
-            <div className="title">
-              <div className="header">{credit.target}</div>
-              {generatePriceTooltip(credit)}
-            </div>
-            <div className="content">
-              {generateParagraph(credit)}
-              <a href={"#" + credit.target}>Edit</a>
-            </div>
+          <div className="title">
+            <div className="header">{credit.target}</div>
+            {generatePriceTooltip(credit)}
+          </div>
+          <div className="content">
+            {generateParagraph(credit)}
+            <a href={"#" + credit.target}>Edit</a>
+          </div>
         </div>
     </Tilt>
   )
