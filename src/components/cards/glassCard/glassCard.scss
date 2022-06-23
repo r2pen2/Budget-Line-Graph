@@ -99,10 +99,10 @@
     }
 
     &.negative {
-        background-color: rgba(40, 0, 0, 0.199);
+        background: linear-gradient(rgba(255, 255, 255, 0), rgba(160, 0, 0, 0.199));
     }
 
     &.positive {
-        background-color: rgba(0, 80, 0, 0.3);;
+        background: linear-gradient(rgba(255, 255, 255, 0), rgba(0, 80, 0, 0.3));
     }
 }

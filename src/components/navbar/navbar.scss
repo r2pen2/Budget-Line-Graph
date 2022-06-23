@@ -4,6 +4,7 @@
 .navbar {
     width: $navbar-width;
     height: 100vh;
+    z-index: 2;
     position: fixed;
     background-color: $bg-primary;
     display: flex;

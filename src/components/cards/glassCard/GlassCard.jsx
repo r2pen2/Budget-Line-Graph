@@ -53,7 +53,7 @@ function getDirection(credit) {
 
 export default function GlassCard({ credit }) {
   return (
-    <Tilt color="green">
+    <Tilt options={{perspective: 1, max: 150, glare: true }}>
         <div className={"card " + getDirection(credit)}>
             <div className="title">
               <div className="header">{credit.target}</div>
