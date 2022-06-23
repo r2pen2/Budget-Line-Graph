@@ -22,6 +22,7 @@
     "react-scripts": "^5.0.1",
     "react-three-fiber": "^6.0.13",
     "react-transition-group": "^4.4.2",
+    "react-vanilla-tilt": "^1.0.0",
     "three": "^0.141.0",
     "three-obj-mtl-loader": "^1.0.3",
     "three-orbitcontrols": "^2.110.3",

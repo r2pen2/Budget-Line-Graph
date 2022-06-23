@@ -1,8 +1,20 @@
 // Imports
 @import url('./assets/style/global.scss');
+@import "./assets/style/variables";
 
 .app {
     zoom: reset;
+
+    .waves {
+        background-image: url('./assets/images/cityDrive.gif');
+        width: calc(100vw - $navbar-width);
+        margin-left: $navbar-width;
+        height: 100vh;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        border-top: 1px solid $bg-primary;
+    }
 }
 
 body, ul {
@@ -10,4 +22,5 @@ body, ul {
     height: 100vh;
     margin: 0;
     padding: 0;
+    overflow: hidden;
 }

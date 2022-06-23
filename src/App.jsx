@@ -1,6 +1,5 @@
 // Style imports
 import "./App.scss";
-import { Canvas } from 'react-three-fiber';
 import theme from "./assets/style/theme";
 
 // Library Imports
@@ -8,7 +7,7 @@ import { ThemeProvider } from "@mui/material"
 
 // Component imports
 import Navbar from "./components/navbar/Navbar";
-import Waves from "./components/waves/Waves";
+import Cards from "./components/cards/Cards";
 
 function App() {
 
@@ -16,7 +15,9 @@ function App() {
     <div className="app">
       <ThemeProvider theme={theme}>
         <Navbar/>
-        <Waves />
+        <div className="waves">
+          <Cards />
+        </div>
       </ThemeProvider>
     </div>
   )
