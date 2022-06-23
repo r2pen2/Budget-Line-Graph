@@ -59,18 +59,44 @@ function getDirection(credit) {
 export default function GlassCard({ credit }) {
 
   const [status, setStatus] = useState(credit.status);
+  const [isFlashing, setIsFlashing] = useState(false);
+  const [isFalling, setIsFalling] = useState(false);
+
+  async function toggleFreeze() {
+
+    const delay = ms => new Promise(res => setTimeout(res, ms));
+
+    if (isFlashing) { setIsFalling(false); }
+    setIsFlashing(true);
+    if (status === "frozen") {
+      setStatus("active");
+    } else {
+      setStatus("frozen");
+    }
+    await delay(400);
+    setIsFlashing(false);
+  }
+
+  async function toggleFalling() {
+
+    const delay = ms => new Promise(res => setTimeout(res, ms));
+
+    setIsFalling(true);
+    await delay(2000);
+    setIsFalling(false);
+  }
 
   function getStatusButtons() {
     if (status === "active") {
       return (
         <div className="top-buttons">
           <Tooltip title="Freeze Card">
-            <IconButton className="left">
+            <IconButton className="left" onClick={() => toggleFreeze()}>
               <AcUnitTwoToneIcon fontSize="large" color="textSecondary"/>
             </IconButton>
           </Tooltip>
           <Tooltip title="Destroy Card">
-            <IconButton className="right">
+            <IconButton className="right" onClick={() => toggleFalling()}>
               <DeleteTwoToneIcon fontSize="large" color="textSecondary"/>
             </IconButton>
           </Tooltip>
@@ -80,11 +106,11 @@ export default function GlassCard({ credit }) {
       return (
         <div className="top-buttons">
           <Tooltip title="Unfreeze Card">
-            <IconButton className="left">
+            <IconButton className="left" onClick={() => toggleFreeze()}>
               <LocalFireDepartmentTwoToneIcon fontSize="large" color="textSecondary"/>
             </IconButton>
           </Tooltip>
-          <Tooltip title="Destroy Card">
+          <Tooltip title="Destroy Card" onClick={() => toggleFalling()}>
             <IconButton className="right">
               <DeleteTwoToneIcon fontSize="large" color="textSecondary"/>
             </IconButton>
@@ -95,20 +121,18 @@ export default function GlassCard({ credit }) {
   }
 
   return (
-    <Tilt options={{perspective: 1, max: 150, glare: true }}>
-        <div className={"card " + getDirection(credit) + " "  + status}>
-          <div className="status">
-            {getStatusButtons()}
-          </div>
-          <div className="title">
-            <div className="header">{credit.target}</div>
-            {generatePriceTooltip(credit)}
-          </div>
-          <div className="content">
-            {generateParagraph(credit)}
-            <a href={"#" + credit.target}>Edit</a>
-          </div>
-        </div>
+    <Tilt options={{perspective: 1, max: 150, glare: true }} className={"card " + getDirection(credit) + " "  + status + (isFalling ? " falling " : "") + (isFlashing ? " flash " : "")}>
+      <div className="status">
+        {getStatusButtons()}
+      </div>
+      <div className="title">
+        <div className="header">{credit.target}</div>
+        {generatePriceTooltip(credit)}
+      </div>
+      <div className="content">
+        {generateParagraph(credit)}
+        <a href={"#" + credit.target}>Edit</a>
+      </div>
     </Tilt>
   )
 }
