@@ -7,15 +7,18 @@ export default function Cards() {
     <div className="wrapper">
       <Stack direction="row" className="cards positive">
         <GlassCard 
-          credit={{ amount: 25, interval: "hour", target: "Sentaca"}}
+          credit={{ amount: 25, interval: "hour", target: "Sentaca", status: "active"}}
         />
         <GlassCard 
-          credit={{ amount: 500, interval: "month", target: "Citrus"}}
+          credit={{ amount: 500, interval: "month", target: "Citrus", status: "active"}}
+        />
+        <GlassCard 
+          credit={{ amount: 100, interval: "week", target: "COL", status: "frozen"}}
         />
       </Stack>
       <Stack direction="row" className="cards negative">
         <GlassCard 
-          credit={{ amount: -4.99, interval: "month", target: "Spotify"}}
+          credit={{ amount: -4.99, interval: "month", target: "Spotify", status: "active"}}
         />
       </Stack>
     </div>

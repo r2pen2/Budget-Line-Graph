@@ -1,6 +1,6 @@
 import "./glassCard.scss";
 
-import React from 'react'
+import { useState } from 'react';
 import Tilt from "../Tilt";
 
 const formatter = new Intl.NumberFormat('en-US', {
@@ -52,9 +52,14 @@ function getDirection(credit) {
 }
 
 export default function GlassCard({ credit }) {
+
+  const [status, setStatus] = useState(credit.status);
+
   return (
     <Tilt options={{perspective: 1, max: 150, glare: true }}>
-        <div className={"card " + getDirection(credit)}>
+        <div className={"card " + getDirection(credit) + " "  + status}>
+          <div className="status">
+          </div>
             <div className="title">
               <div className="header">{credit.target}</div>
               {generatePriceTooltip(credit)}
