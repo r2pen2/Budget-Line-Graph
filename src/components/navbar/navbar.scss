@@ -39,7 +39,7 @@
                 justify-content: flex-start;
                 align-items: center;
                 display: flex;
-                filter: grayscale(100%) brightness(150%);
+                filter: grayscale(100%) brightness(200%);
 
                 .item-icon {
                     min-width: 2rem;
@@ -102,4 +102,12 @@
             transform: rotate(-90deg);
         }
     }
+
+    .divider {
+        border-top: 1px solid white;
+        opacity: 0.3;
+        border-radius: 50%;
+        width: 80%;
+    }
+
 }
