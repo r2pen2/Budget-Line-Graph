@@ -4,6 +4,8 @@
 
 .app {
     zoom: reset;
+    display: flex;
+    flex-direction: row;
 
     .waves {
         background-image: url('./assets/images/cityDrive.gif');

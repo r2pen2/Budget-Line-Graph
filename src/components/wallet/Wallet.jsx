@@ -1,11 +1,13 @@
-import "./cards.scss";
+import "./wallet.scss";
 import GlassCard from "./glassCard/GlassCard";
+import RowLabel from "./rowLabel/RowLabel";
 import { Stack } from "@mui/material"
 
-export default function Cards() {
+export default function Wallet() {
   return (
     <div className="wrapper">
-      <Stack direction="row" className="cards positive">
+      <Stack direction="row" className="cards positive" alignItems="center">
+        <RowLabel text="Income" />
         <GlassCard 
           credit={{ amount: 25, interval: "hour", target: "Sentaca", status: "active"}}
         />
@@ -16,7 +18,8 @@ export default function Cards() {
           credit={{ amount: 100, interval: "week", target: "COL", status: "frozen"}}
         />
       </Stack>
-      <Stack direction="row" className="cards negative">
+      <Stack direction="row" className="cards negative" alignItems="center">
+        <RowLabel text="Expenses" />
         <GlassCard 
           credit={{ amount: -4.99, interval: "month", target: "Spotify", status: "active"}}
         />

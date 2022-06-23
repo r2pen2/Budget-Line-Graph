@@ -4,10 +4,11 @@ import theme from "./assets/style/theme";
 
 // Library Imports
 import { ThemeProvider } from "@mui/material"
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 // Component imports
 import Navbar from "./components/navbar/Navbar";
-import Cards from "./components/cards/Cards";
+import Wallet from "./components/wallet/Wallet";
 
 function App() {
 
@@ -16,7 +17,15 @@ function App() {
       <ThemeProvider theme={theme}>
         <Navbar/>
         <div className="waves">
-          <Cards />
+          <Router>
+            <Routes>
+              <Route path="/" element={<div>Graph</div>} />
+              <Route path="/home" element={<div>Home</div>} />
+              <Route path="/graph" element={<div>Home</div>} />
+              <Route path="/wallet" element={<Wallet />} />
+              <Route path="/logout" element={<div>Logout</div>} />
+            </Routes>
+          </Router>
         </div>
       </ThemeProvider>
     </div>

@@ -15,40 +15,26 @@ export default function Navbar() {
     <div className="navbar">
       <List className="nav-items">
         <li className="item">
-          <IconButton className="button logo" href="#" color="secondary">
+          <IconButton className="button logo" href="/home" color="secondary">
             <Typography className="item-text">Budgeteer</Typography>
             <RocketLaunchTwoToneIcon className="item-icon rotate" fontSize="large"/>
           </IconButton>
         </li>
         <li className="item">
-          <IconButton className="button" href="#" color="secondary">
+          <IconButton className="button" href="/graph" color="secondary">
             <TimelineTwoToneIcon className="item-icon" fontSize="large"/>
             <Typography className="item-text">Graph</Typography>
           </IconButton>
         </li>
         <div className="divider"/>
         <li className="item">
-          <IconButton className="button" href="#incomes" color="secondary">
-            <AddCircleTwoToneIcon className="item-icon" fontSize="large"/>
-            <Typography className="item-text">Incomes</Typography>
-          </IconButton>
-        </li>
-        <div className="divider"/>
-        <li className="item">
-          <IconButton className="button" href="#expenses" color="secondary">
-            <RemoveCircleTwoToneIcon className="item-icon" fontSize="large"/>
-            <Typography className="item-text">Expenses</Typography>
-          </IconButton>
-        </li>
-        <div className="divider"/>
-        <li className="item">
-          <IconButton className="button" href="#wallet" color="secondary">
+          <IconButton className="button" href="/wallet" color="secondary">
             <AccountBalanceWalletTwoToneIcon className="item-icon" fontSize="large"/>
             <Typography className="item-text">My Wallet</Typography>
           </IconButton>
         </li>
         <li className="item">
-          <IconButton className="button" href="#logout" color="textPrimary">
+          <IconButton className="button" href="/logout" color="textPrimary">
             <MeetingRoomTwoToneIcon className="item-icon" fontSize="large"/>
             <Typography className="item-text">Sign Out</Typography>
           </IconButton>
