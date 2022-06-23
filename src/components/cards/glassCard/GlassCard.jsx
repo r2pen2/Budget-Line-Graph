@@ -56,15 +56,17 @@ function getDirection(credit) {
   return credit.amount > 0 ? "positive" : "negative";
 }
 
+
+
 export default function GlassCard({ credit }) {
 
   const [status, setStatus] = useState(credit.status);
   const [isFlashing, setIsFlashing] = useState(false);
   const [isFalling, setIsFalling] = useState(false);
 
-  async function toggleFreeze() {
+  const delay = ms => new Promise(res => setTimeout(res, ms));
 
-    const delay = ms => new Promise(res => setTimeout(res, ms));
+  async function toggleFreeze() {
 
     if (isFlashing) { setIsFalling(false); }
     setIsFlashing(true);
@@ -78,8 +80,6 @@ export default function GlassCard({ credit }) {
   }
 
   async function toggleFalling() {
-
-    const delay = ms => new Promise(res => setTimeout(res, ms));
 
     setIsFalling(true);
     await delay(2000);

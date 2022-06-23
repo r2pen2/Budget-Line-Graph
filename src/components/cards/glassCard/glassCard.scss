@@ -111,7 +111,6 @@
 
     &.frozen {
         opacity: 1;
-        box-shadow: 0px 0px 50px rgba(0, 225, 255, 0.5);
 
         &.negative {
             background-image: url("../../../assets/images/ice35.png"), linear-gradient(rgba(255, 255, 255, 0), rgba(160, 0, 0, 0.7));
@@ -135,7 +134,6 @@
     }
 
     &.active {
-        box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.5);
 
         &.negative {
             background-image: url("../../../assets/images/glass35.png"), linear-gradient(rgba(255, 255, 255, 0), rgba(160, 0, 0, 0.7));
