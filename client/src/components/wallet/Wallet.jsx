@@ -2,8 +2,12 @@ import "./wallet.scss";
 import GlassCard from "./glassCard/GlassCard";
 import RowLabel from "./rowLabel/RowLabel";
 import { Stack } from "@mui/material"
+import { useState } from 'react'
 
 export default function Wallet() {
+
+  const [credits, setCredits] = useState([]);
+  const [loading, setLoading] = useState(false);
   return (
     <div className="wrapper">
       <Stack direction="row" className="cards positive" alignItems="center">

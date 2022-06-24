@@ -10,7 +10,7 @@ const firebaseConfig = {
   appId: "1:841108331371:web:c6cd4e9360fc1583fc8a2e"
 };
 
-const app = initializeApp(firebaseConfig);
+export const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 
 const provider = new GoogleAuthProvider();
@@ -35,5 +35,4 @@ export const signOutUser = () => {
     window.location = "/home";
     localStorage.removeItem("name");
     localStorage.removeItem("email");
-    localStorage.removeItem("pfpUrl");
 }
