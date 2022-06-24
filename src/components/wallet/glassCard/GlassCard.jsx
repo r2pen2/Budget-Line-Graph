@@ -60,7 +60,7 @@ function getDirection(credit) {
 
 export default function GlassCard({ credit }) {
 
-  const [status, setStatus] = useState(credit.status);
+  const [active, setActive] = useState(credit.active);
   const [isFlashing, setIsFlashing] = useState(false);
   const [isFalling, setIsFalling] = useState(false);
 
@@ -70,11 +70,7 @@ export default function GlassCard({ credit }) {
 
     if (isFlashing) { setIsFalling(false); }
     setIsFlashing(true);
-    if (status === "frozen") {
-      setStatus("active");
-    } else {
-      setStatus("frozen");
-    }
+    setActive(!active);
     await delay(400);
     setIsFlashing(false);
   }
@@ -87,7 +83,7 @@ export default function GlassCard({ credit }) {
   }
 
   function getStatusButtons() {
-    if (status === "active") {
+    if (active) {
       return (
         <div className="top-buttons">
           <Tooltip title="Freeze Card">
@@ -121,7 +117,7 @@ export default function GlassCard({ credit }) {
   }
 
   return (
-    <Tilt options={{perspective: 1, max: 150, glare: true }} className={"card " + getDirection(credit) + " "  + status + (isFalling ? " falling " : "") + (isFlashing ? " flash " : "")}>
+    <Tilt options={{perspective: 1, max: 150, glare: true }} className={"card " + getDirection(credit) + " "  + (active ? "active" : "frozen") + (isFalling ? " falling " : "") + (isFlashing ? " flash " : "")}>
       <div className="status">
         {getStatusButtons()}
       </div>

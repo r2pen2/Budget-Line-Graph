@@ -25,7 +25,7 @@ function App() {
           <div className="waves">
             <Router>
                 <Routes>
-                  <Route path="/" element={<div>Graph</div>} />
+                  <Route path="/" element={<Home />} />
                   <Route path="/home" element={<Home />} />
                   <Route path="/graph" element={<div>Graph</div>} />
                   <Route path="/wallet" element={<Wallet />} />
