@@ -9,10 +9,20 @@ import AddCircleTwoToneIcon from '@mui/icons-material/AddCircleTwoTone';
 import MeetingRoomTwoToneIcon from '@mui/icons-material/MeetingRoomTwoTone';
 import TimelineTwoToneIcon from '@mui/icons-material/TimelineTwoTone';
 import RocketLaunchTwoToneIcon from '@mui/icons-material/RocketLaunchTwoTone';
+import { useContext } from 'react'
+import { UserContext } from '../../UserContext';
 
 import { signOutUser } from '../../Firebase'
 
+
 export default function Navbar() {
+  const {user, setUser} = useContext(UserContext);
+
+  async function handleSignOut() {
+    let signOut = await signOutUser();
+    setUser(signOut);
+  }
+
   return (
     <div className="navbar">
       <List className="nav-items">
@@ -36,7 +46,7 @@ export default function Navbar() {
           </IconButton>
         </li>
         <li className="item">
-          <IconButton className="button" onClick={signOutUser} color="textPrimary">
+          <IconButton className="button" onClick={() => handleSignOut()} color="textPrimary">
             <MeetingRoomTwoToneIcon className="item-icon" fontSize="large"/>
             <Typography className="item-text">Sign Out</Typography>
           </IconButton>

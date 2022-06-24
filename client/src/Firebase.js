@@ -1,5 +1,7 @@
+import { useContext } from 'react'
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth'
+import { UserContext } from './UserContext'
 
 const firebaseConfig = {
   apiKey: "AIzaSyB-WnWl81Jgb0wExFvJD2ydeGqqGXzjNyU",
@@ -15,24 +17,22 @@ export const auth = getAuth(app);
 
 const provider = new GoogleAuthProvider();
 
-export const signInWithGoogle = () => {
-    signInWithPopup(auth, provider).then((result) => {
-        const name = result.user.displayName;
-        const email = result.user.email;
-        const profilePic = result.user.photoUrl;
-
-        localStorage.setItem("name", name);
-        localStorage.setItem("email", email);
-        localStorage.setItem("pfpUrl", profilePic);
-        window.location = "/home";
-    }).catch((error) => {
-        console.log(error);
-    });
+export async function signInWithGoogle() {
+    return new Promise((resolve, reject) => {
+        signInWithPopup(auth, provider).then((result) => {
+            resolve(result.user);
+        }).catch((error) => {
+            reject(error);
+        });
+    })
 }
 
-export const signOutUser = () => {
-    signOut(auth);
-    window.location = "/home";
-    localStorage.removeItem("name");
-    localStorage.removeItem("email");
+export async function signOutUser() {
+    return new Promise((resolve, reject) => {
+        signOut(auth).then((result) => {
+            resolve(null);
+        }).catch((error) => {
+            reject(error);
+        });
+    })
 }
