@@ -136,11 +136,11 @@
     &.active {
 
         &.negative {
-            background-image: url("../../../assets/images/glass35.png"), linear-gradient(rgba(255, 255, 255, 0), rgba(160, 0, 0, 0.7));
+            background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(160, 0, 0, 0.7));
         }
     
         &.positive {
-            background-image: url("../../../assets/images/glass35.png"), linear-gradient(rgba(255, 255, 255, 0), rgba(0, 80, 0, 0.7));
+            background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(0, 80, 0, 0.7));
         }
     }
 
