@@ -9,18 +9,18 @@ import AddCircleTwoToneIcon from '@mui/icons-material/AddCircleTwoTone';
 import MeetingRoomTwoToneIcon from '@mui/icons-material/MeetingRoomTwoTone';
 import TimelineTwoToneIcon from '@mui/icons-material/TimelineTwoTone';
 import RocketLaunchTwoToneIcon from '@mui/icons-material/RocketLaunchTwoTone';
-import { useContext } from 'react'
-import { UserContext } from '../../UserContext';
 
 import { signOutUser } from '../../Firebase'
 
 
 export default function Navbar() {
-  const {user, setUser} = useContext(UserContext);
 
   async function handleSignOut() {
-    let signOut = await signOutUser();
-    setUser(signOut);
+    signOutUser().then(() => {
+      localStorage.removeItem('budgeteer:user');
+      localStorage.removeItem('budgeteer:credits');
+      window.location = "/home";
+    });
   }
 
   return (

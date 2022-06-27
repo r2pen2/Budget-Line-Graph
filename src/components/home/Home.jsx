@@ -1,26 +1,26 @@
 import "./home.scss";
-import { useContext } from 'react'
 import Typewriter from 'typewriter-effect'
 import { Button, Typography } from "@mui/material"
 import GoogleIcon from '@mui/icons-material/Google';
-import { signInWithGoogle, auth } from "../../Firebase"
-import { UserContext } from '../../UserContext';
-
+import { signInWithGoogle } from "../../Firebase"
 
 export default function Home() {
-    const {user, setUser} = useContext(UserContext);
 
     async function handleSignIn() {
-        let signIn = await signInWithGoogle();
-        setUser(signIn);
+        signInWithGoogle().then((newUser) => {
+            localStorage.setItem("budgeteer:user", JSON.stringify(newUser));
+            window.location = "/wallet";
+        });
     }
+
+    const user = JSON.parse(localStorage.getItem("budgeteer:user"));
 
     function renderButtonOnUserInfo(user) {
         if (user) {
             return <Typography className="logged-in">Signed in as {user.displayName}</Typography>
         } else {
             return (
-                <Button variant="contained" justifyContent="center" alignItems="center" onClick={() => handleSignIn()}>
+                <Button variant="contained" onClick={() => handleSignIn()}>
                     <GoogleIcon/>
                     <Typography marginLeft="10px">Sign in with Google</Typography>
                 </Button>

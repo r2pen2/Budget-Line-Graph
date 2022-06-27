@@ -11,17 +11,13 @@ import { React, useState } from 'react';
 import Navbar from "./components/navbar/Navbar";
 import Wallet from "./components/wallet/Wallet";
 import Home from "./components/home/Home";
-import {UserContext} from './UserContext'
 
 function App() {
 
-  const [user, setUser] = useState(null)
-
   return (
-    <UserContext.Provider value={{user, setUser}}>
       <div className="app">
         <ThemeProvider theme={theme}>
-          <Navbar/>
+          <Navbar />
           <div className="waves">
             <Router>
                 <Routes>
@@ -35,7 +31,6 @@ function App() {
           </div>
         </ThemeProvider>
       </div>
-    </UserContext.Provider>
   )
 }
 

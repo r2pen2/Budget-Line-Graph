@@ -58,7 +58,7 @@ function getDirection(credit) {
 
 
 
-export default function GlassCard({ credit }) {
+export default function GlassCard({ credit, deleteCredit }) {
 
   const [active, setActive] = useState(credit.active);
   const [isFlashing, setIsFlashing] = useState(false);
@@ -80,6 +80,7 @@ export default function GlassCard({ credit }) {
     setIsFalling(true);
     await delay(2000);
     setIsFalling(false);
+    deleteCredit(credit)
   }
 
   function getStatusButtons() {

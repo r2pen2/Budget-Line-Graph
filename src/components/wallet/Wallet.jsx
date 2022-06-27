@@ -1,74 +1,172 @@
 import "./wallet.scss";
 import GlassCard from "./glassCard/GlassCard";
 import RowLabel from "./rowLabel/RowLabel";
-import { Stack, Button } from "@mui/material"
-import { useState, useEffect, useContext } from 'react'
-import { firestore, auth } from '../../Firebase'
-import { onSnapshot, collection, addDoc } from "firebase/firestore";
-import { UserContext } from "../../UserContext";
+import { Stack, Button, Modal, TextField, Select, MenuItem, Typography } from "@mui/material"
+import { useState, useEffect } from 'react'
+import { firestore } from '../../Firebase'
+import { onSnapshot, doc, collection, addDoc, getDoc, setDoc } from "firebase/firestore";
+
+function randomString(length) {
+  var chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz'.split('');
+
+  if (! length) {
+      length = Math.floor(Math.random() * chars.length);
+  }
+
+  var str = '';
+  for (var i = 0; i < length; i++) {
+      str += chars[Math.floor(Math.random() * chars.length)];
+  }
+  return str;
+}
+
+const user = JSON.parse(localStorage.getItem("budgeteer:user"));
 
 export default function Wallet() {
 
-  console.log(auth);
-  if (!auth.currentUser) {
-    window.location = "/home"
+  if (!user) { window.location = "/home"; }
+
+  const [credits, setCredits] = useState(localStorage.getItem("budgeteer:credits") ? JSON.parse(localStorage.getItem("budgeteer:credits")) : []);
+  const [blur, setBlur] = useState(true);
+  const [dbCalls, setDbCalls] = useState(0);
+
+  const [newAmt, setNewAmt] = useState("");
+  const [newInt, setNewInt] = useState("");
+  const [newTgt, setNewTgt] = useState("");
+  const [newType, setNewType] = useState("");
+
+  const [submitEnable, setSubmitEnable] = useState(false);
+
+  useEffect(() => {
+    fetchCredits().then(setBlur(false));
+  }, [dbCalls])
+
+  async function fetchCredits() {
+    const docRef = doc(firestore, "wallets", user.uid); 
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      const newCredits = [];
+      const dbCredits = JSON.parse(docSnap.data().credits);
+      console.log(dbCredits)
+      dbCredits.forEach((c) => {
+        newCredits.push(c);
+      });
+      setCredits(newCredits);
+    } else {
+      console.log("No such document!");
+      localStorage.removeItem('budgeteer:credits');
+      setCredits([]);
+    }
   }
 
-  const {user, setUser} = useContext(UserContext);
-  const [credits, setCredits] = useState([]);
-
-  useEffect(() => 
-    onSnapshot(collection(firestore, "wallets"), (snapshot) => {
-      for (const d of snapshot.docs) {
-        credits.push({ id: d.id, data: d.data() })
-      }
-      console.log(credits)
-    }
-  ), []);
-
-  async function handleNew() {
-
-    const walletRef = collection(firestore, "wallets").doc(auth.currentUser.uid)
-
-    walletRef.get()
-      .then((docSnapshot) => {
-        if (docSnapshot.exists) {
-          walletRef.onSnapshot((doc) => {
-            // do stuff with the data
-          });
-        } else {
-          walletRef.set({
-            // create the document
-          }) 
+  async function addNew() {
+    setBlur(false);
+    const c = { amount: (newType === "Add Income" ? newAmt : (newAmt*-1)), interval: newInt, target: newTgt, active: true, id: randomString(8) }
+    const docRef = doc(firestore, "wallets", user.uid); 
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      const dbCredits = JSON.parse(docSnap.data().credits);
+      dbCredits.push(c);
+      const json = JSON.stringify(dbCredits);
+      await setDoc(doc(firestore, "wallets", user.uid), 
+        {
+          credits: json
         }
-    });
+      ); 
+      setDbCalls(dbCalls + 1);
+    } else {
+      console.log("No such document! Creating a new one...");
+      const json = JSON.stringify([c]);
+      await setDoc(doc(firestore, "wallets", user.uid), 
+        {
+          credits: json
+        }
+      ); 
+      setDbCalls(dbCalls + 1);
+      setNewTgt("");
+      setNewInt("");
+      setNewAmt("");
+    }
+  }
 
-    setCredits([]);
-    const payload = { amount: 500, interval: "month", target: "Citrus", active: true};
-    addDoc(collection(firestore, "wallets"), payload);
+  async function deleteCredit(c) {
+    console.log("Deleting: " + c);
+  }
+
+  function generateCards(type) {
+    localStorage.setItem("budgeteer:credits", JSON.stringify(credits));
+    return credits.map((c) => {
+      if (type === "positive") {
+        if (c.amount > 0) {
+          return <GlassCard credit={c} deleteCredit={deleteCredit} />;
+        }  
+      } else {
+        if (c.amount <= 0) {
+          return <GlassCard credit={c} deleteCredit={deleteCredit} />;
+        }
+      }
+    });
+  }
+
+  function handleEnter(e) {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      if (submitEnable) {
+        addNew();
+      }
+    }
+  }
+
+  function enableSubmit() {
+    if (newAmt && newTgt && newInt) {
+      if ((newAmt !== 0) && (newInt.length > 0) && (newTgt.length > 0)) {
+        setSubmitEnable(true);
+        return;
+      }
+    }
+    setSubmitEnable(false)
   }
 
   return (
     <div className="wrapper">
       <Stack direction="row" className="cards positive" alignItems="center">
-        <RowLabel text="Income" />
-        <GlassCard 
-          credit={{ amount: 25, interval: "hour", target: "Sentaca", active: true}}
-        />
-        <GlassCard 
-          credit={{ amount: 500, interval: "month", target: "Citrus", active: true}}
-        />
-        <GlassCard 
-          credit={{ amount: 100, interval: "week", target: "COL", active: false}}
-        />
+        <RowLabel text="Add Income" setBlur={setBlur} setNewType={setNewType}/>
+        { generateCards("positive") }
       </Stack>
       <Stack direction="row" className="cards negative" alignItems="center">
-        <RowLabel text="Expenses" />
-        <GlassCard 
-          credit={{ amount: -4.99, interval: "month", target: "Spotify", active: true}}
-        />
+        <RowLabel text="Add Expenses" setBlur={setBlur} setNewType={setNewType}/>
+        { generateCards("negative") }
       </Stack>
-      <Button variant="contained" onClick={() => handleNew()}>New</Button>
+      <Modal
+        open={blur}
+        onClose={() => setBlur(false)}
+        className="modal"
+      >
+        <div className="new-form">
+          <div className="title">{newType}</div>
+          <div className="fields">
+            <TextField required id="target" label="Target" type="text" value={newTgt} onChange={e => setNewTgt(e.target.value)} onKeyUp={enableSubmit} onBlur={enableSubmit} onKeyDown={(e) => {handleEnter(e)}}/>
+            <TextField required id="amount" label="Amount" type="text" value={newAmt} onChange={e => setNewAmt(e.target.value)} onKeyUp={enableSubmit} onBlur={enableSubmit} onKeyDown={(e) => {handleEnter(e)}}/>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={newInt ? newInt : "hour"}
+              label="Interval"
+              onChange={(e) => {setNewInt(e.target.value); enableSubmit();}}
+              onBlur={enableSubmit}
+            >
+              <MenuItem value={"hour"}>Hourly</MenuItem>
+              <MenuItem value={"day"}>Daily</MenuItem>
+              <MenuItem value={"week"}>Weekly</MenuItem>
+              <MenuItem value={"month"}>Monthly</MenuItem>
+              <MenuItem value={"year"}>Yearly</MenuItem>
+            </Select>
+            <Button variant="contained" onClick={() => addNew()} disabled={false}>
+              Submit
+            </Button>
+          </div>
+        </div>
+      </Modal>
     </div>
   )
 }

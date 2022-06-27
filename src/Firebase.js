@@ -1,8 +1,6 @@
-import { useContext } from 'react'
 import { initializeApp } from "firebase/app";
 import { getFirestore } from 'firebase/firestore'
 import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth'
-import { UserContext } from './UserContext'
 
 const firebaseConfig = {
   apiKey: "AIzaSyB-WnWl81Jgb0wExFvJD2ydeGqqGXzjNyU",
@@ -14,7 +12,7 @@ const firebaseConfig = {
 };
 
 export const app = initializeApp(firebaseConfig);
-export const auth = getAuth(app);
+const auth = getAuth(app);
 export const firestore = getFirestore();
 
 const provider = new GoogleAuthProvider();
