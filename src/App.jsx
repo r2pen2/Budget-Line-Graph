@@ -11,6 +11,8 @@ import { React, useState } from 'react';
 import Navbar from "./components/navbar/Navbar";
 import Wallet from "./components/wallet/Wallet";
 import Home from "./components/home/Home";
+import Graph from "./components/graph/Graph"
+
 
 function App() {
 
@@ -23,7 +25,7 @@ function App() {
                 <Routes>
                   <Route path="/" element={<Home />} />
                   <Route path="/home" element={<Home />} />
-                  <Route path="/graph" element={<div>Graph</div>} />
+                  <Route path="/graph" element={<Graph />} />
                   <Route path="/wallet" element={<Wallet />} />
                   <Route path="/logout" element={<div>Logout</div>} />
                 </Routes>

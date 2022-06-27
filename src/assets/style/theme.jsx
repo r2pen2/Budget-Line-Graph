@@ -27,6 +27,9 @@ export default createTheme({
     },
     frozenBlue: {
       main: 'rgba(0, 225, 255, 0.5)'
+    },
+    inputYellow: {
+      main: 'rgb(255, 254, 199)'
     }
   },
 });

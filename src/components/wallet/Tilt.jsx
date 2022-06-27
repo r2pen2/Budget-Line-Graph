@@ -208,10 +208,6 @@ VanillaTilt.init = function init(elements, settings) {
 };
 
 var cardStyles = {
-  width: '280px',
-  height: '400px',
-  margin: '30px',
-  borderRadius: "15px"
 };
 
 var Card = function (_React$Component) {

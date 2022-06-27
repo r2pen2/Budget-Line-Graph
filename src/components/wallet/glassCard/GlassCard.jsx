@@ -58,16 +58,17 @@ function getDirection(credit) {
 
 
 
-export default function GlassCard({ credit, deleteCredit }) {
+export default function GlassCard({ credit, deleteCredit, freezeCredit }) {
 
   const [active, setActive] = useState(credit.active);
   const [isFlashing, setIsFlashing] = useState(false);
   const [isFalling, setIsFalling] = useState(false);
+  const [isHidden, setIsHidden] = useState(false);
 
   const delay = ms => new Promise(res => setTimeout(res, ms));
 
   async function toggleFreeze() {
-
+    freezeCredit(credit)
     if (isFlashing) { setIsFalling(false); }
     setIsFlashing(true);
     setActive(!active);
@@ -76,11 +77,9 @@ export default function GlassCard({ credit, deleteCredit }) {
   }
 
   async function toggleFalling() {
-
     setIsFalling(true);
-    await delay(2000);
-    setIsFalling(false);
-    deleteCredit(credit)
+    await delay(1500);
+    deleteCredit(credit);
   }
 
   function getStatusButtons() {
@@ -118,7 +117,7 @@ export default function GlassCard({ credit, deleteCredit }) {
   }
 
   return (
-    <Tilt options={{perspective: 1, max: 150, glare: true }} className={"card " + getDirection(credit) + " "  + (active ? "active" : "frozen") + (isFalling ? " falling " : "") + (isFlashing ? " flash " : "")}>
+    <Tilt options={{perspective: 1, max: 150, glare: true }} className={"card " + getDirection(credit) + " "  + (active ? "active" : "frozen") + (isFalling ? " falling " : "") + (isFlashing ? " flash " : "") + (isHidden ? "hidden " : "")}>
       <div className="status">
         {getStatusButtons()}
       </div>

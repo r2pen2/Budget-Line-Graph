@@ -1,7 +1,6 @@
 .row-label {
     height: 400px;
     width: 130px;
-    margin-left: 30px;
     background-color: rgba(0, 0, 0, 0.548);
     overflow: hidden;
     border-radius: 15px;
@@ -15,6 +14,7 @@
     background-repeat: no-repeat;
     display: flex;
     justify-content: center;
+    border-radius: 15px;
 
     .text {
         color: rgb(255, 254, 199);
@@ -28,5 +28,10 @@
         -khtml-user-select: none;
         -webkit-user-select: none;
         -o-user-select: none;
+
+        .delta {
+            font-size: 16px;
+            font-weight: 300;
+        }
     }
 }

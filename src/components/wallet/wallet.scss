@@ -1,10 +1,12 @@
 @import "../../assets/style/variables";
 
 .wrapper {
-    height: 100vh;
+    height: calc(100vh - 40px);
+    width: calc(100vw - 40px -  $navbar-width);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    margin: 20px;
 }
 
 .placeholder {
@@ -24,12 +26,11 @@
 
     .new-form {
         width: 400px;
-        height: 400px;
+        height: 500px;
         border-radius: 15px;
         border-top: 1px solid rgba(255, 255, 255, 0.5);
         border-left: 1px solid rgba(255, 255, 255, 0.5);
         backdrop-filter: blur(5px);
-        background-color: $text-primary;
         overflow: hidden;
         display: flex;
         flex-direction: column;
@@ -39,6 +40,7 @@
         margin-bottom: 40px;
 
         .title {
+            color: rgb(255, 254, 199);
             margin-top: 30px;
             font-size: 32px;
         }

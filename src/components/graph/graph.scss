@@ -1,0 +1,41 @@
+.graph {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    
+    .delta-panel {
+        height: 200px;
+        width: 400px;
+        background-color: rgba(0, 0, 0, 0.205);
+        overflow: hidden;
+        border-radius: 15px;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border-top: 1px solid rgba(255, 255, 255, 0.5);
+        border-left: 1px solid rgba(255, 255, 255, 0.5);
+        backdrop-filter: blur(5px);
+        background-position: center;
+        background-repeat: no-repeat;
+        display: flex;
+        justify-content: center;
+        border-radius: 15px;
+
+        .text {
+            color: rgb(255, 254, 199);
+            font-size: 42px;
+            font-weight: bold;
+            transform: rotate(-90deg);
+            width: 400px;
+            text-align: center;
+            user-select: none;
+            -moz-user-select: none;
+            -khtml-user-select: none;
+            -webkit-user-select: none;
+            -o-user-select: none;
+        }
+    }
+}

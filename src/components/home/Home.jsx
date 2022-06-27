@@ -3,6 +3,7 @@ import Typewriter from 'typewriter-effect'
 import { Button, Typography } from "@mui/material"
 import GoogleIcon from '@mui/icons-material/Google';
 import { signInWithGoogle } from "../../Firebase"
+import Tilt from "../wallet/Tilt"
 
 export default function Home() {
 
@@ -29,7 +30,7 @@ export default function Home() {
     }
 
     return (
-    <div className="home">
+    <Tilt className="home">
         <div className="panel">
             <div className="branding">
                 <Typography className="title">
@@ -41,6 +42,6 @@ export default function Home() {
             </div>
         </div>
         { renderButtonOnUserInfo(user) }
-    </div>
+    </Tilt>
   )
 }
