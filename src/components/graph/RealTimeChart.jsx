@@ -3,15 +3,13 @@ import Chart from "react-apexcharts";
 import {useState} from 'react'
 import { colors } from "@mui/material";
 
-const now = new Date();
 
-export default function RealTimeChart() {
+export default function RealTimeChart({startDate, pastData, currentVal, currentTime}) {
 
-    const [startDate, setStartDate] = useState(new Date(now.getFullYear(), now.getMonth(), now.getDate() - 7).getTime());
-    const [data, setData] = useState([
-        [startDate, 40],
-        [now, 60],
+    const [data, setData] = useState([pastData, 
+        [currentTime.getTime(), currentVal],
       ]);
+      console.log(data)
     var state = {
         series: [{
                 data: data,
